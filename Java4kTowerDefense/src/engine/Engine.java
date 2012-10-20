@@ -15,6 +15,7 @@ public class Engine {
 	Player player;
 	
 	public Engine(){
+		//going to fill the grid with Tile types once that class is created
 		gameArea = new Entity[GRID_HEIGHT][GRID_WIDTH];
 		
 		player = new Player();
