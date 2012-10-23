@@ -4,7 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import engine.Engine;
-// test - hrybacki -- testing github
+
 public class Wall implements Entity {
 
 	//fields
