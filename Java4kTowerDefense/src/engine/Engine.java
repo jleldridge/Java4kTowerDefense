@@ -39,9 +39,6 @@ public class Engine {
 		//set the player's position based on the dx and dy values
 		player.setX(player.getX() + player.getDx());
 		player.setY(player.getY() + player.getDy());
-		//this is choppy, maybe could be taken out when game loop speed is controlled
-		player.setDx(0);
-		player.setDy(0);
 		
 		//place the player onto the grid based on its new x and y values
 		gameArea[player.getY()][player.getX()] = player;
