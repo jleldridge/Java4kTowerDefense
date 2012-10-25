@@ -5,16 +5,16 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import engine.Engine;
 
-public class Wall extends Terrain {
-
+public class Boulder extends Terrain {
+	
 	// fields
 	private int x, y;
 	private BufferedImage sprite;
 	private boolean traversable = false;
 	private boolean destroyable = false;
-	
+		
 	// constructors
-	public Wall() {
+	public Boulder() {
 		x = 0;
 		y = 0;
 		sprite = new BufferedImage(Engine.SQUARE_DIMENSION, Engine.SQUARE_DIMENSION, BufferedImage.TYPE_INT_RGB);
@@ -23,7 +23,7 @@ public class Wall extends Terrain {
 		g.fillRect(0, 0, Engine.SQUARE_DIMENSION, Engine.SQUARE_DIMENSION);
 	}
 	
-	public Wall(int x, int y) {
+	public Boulder(int x, int y) {
 		this.x = x;
 		this.y = y;
 		sprite = new BufferedImage(Engine.SQUARE_DIMENSION, Engine.SQUARE_DIMENSION, BufferedImage.TYPE_INT_RGB);
@@ -31,13 +31,12 @@ public class Wall extends Terrain {
 		g.setColor(Color.GREEN);
 		g.fillRect(0, 0, Engine.SQUARE_DIMENSION, Engine.SQUARE_DIMENSION);
 	}
-
+	
 	// getters
 	@Override
 	public BufferedImage getImage() {
 		return this.sprite;
 	}
 	
-
-
+	
 }
