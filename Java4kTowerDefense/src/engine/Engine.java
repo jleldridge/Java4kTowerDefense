@@ -17,7 +17,6 @@ public class Engine {
 	Stack<Integer> keysDown;
 	Entity[][] gameArea;
 	Player player;
-	int tempCounter = 10;
 
 	public Engine() {
 		// going to fill the grid with Tile types once that class is created
@@ -27,12 +26,13 @@ public class Engine {
 		gameArea[player.getY()][player.getX()] = player;
 
 		// for testing positioning of entities on the grid
-//		gameArea[0][0] = new Wall(0, 0);
-//		gameArea[1][5] = new Wall(1, 5);
-//		gameArea[7][1] = new Wall(7, 1);
-//		gameArea[7][8] = new Wall(7, 8);
-//		gameArea[8][7] = new Wall(8, 7);
-//		gameArea[GRID_HEIGHT-1][GRID_WIDTH-1] = new Wall(GRID_HEIGHT-1, GRID_WIDTH-1);
+		// gameArea[0][0] = new Wall(0, 0);
+		// gameArea[1][5] = new Wall(1, 5);
+		// gameArea[7][1] = new Wall(7, 1);
+		// gameArea[7][8] = new Wall(7, 8);
+		// gameArea[8][7] = new Wall(8, 7);
+		// gameArea[GRID_HEIGHT-1][GRID_WIDTH-1] = new Wall(GRID_HEIGHT-1,
+		// GRID_WIDTH-1);
 
 	}
 
@@ -53,19 +53,27 @@ public class Engine {
 			player.setDy(1);
 		}
 
-		// delete the player's old position on the grid
-		gameArea[player.getY()][player.getX()] = null;
+		//set the player's position based on the dx and dy values and
+		//only move the player if they're at the end of the movement
+		//sprite
+		if (player.getMovementFrame() == 9) {
+			// delete the player's old position on the grid
+			gameArea[player.getY()][player.getX()] = null;
+			
+			player.setX(player.getX() + player.getDx());
+			player.setY(player.getY() + player.getDy());
 
-		// set the player's position based on the dx and dy values
-		player.setX(player.getX() + player.getDx());
-		player.setY(player.getY() + player.getDy());
+			// place the player onto the grid based on its new x and y values
+			gameArea[player.getY()][player.getX()] = player;
 
-		// place the player onto the grid based on its new x and y values
-		gameArea[player.getY()][player.getX()] = player;
-
-		// reset the action states of the player
-		player.setDx(0);
-		player.setDy(0);
+			// reset the action states of the player
+			player.setDx(0);
+			player.setDy(0);
+			player.nextMovementFrame();
+		}	
+		else if(player.getDx() != 0 || player.getDy() != 0){
+			player.nextMovementFrame();
+		}
 	}
 
 	public void render(Graphics g) {

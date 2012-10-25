@@ -6,11 +6,12 @@ import java.awt.image.BufferedImage;
 
 import engine.Engine;
 
-public class Player implements Entity{
+public class Player extends Entity{
 	private BufferedImage sprite;
 	private int x, y;
 	//the player's "speed" in x and y directions
 	private int dx, dy;
+	private int movementFrame;
 	
 	public Player(){
 		x = 0;
@@ -19,10 +20,21 @@ public class Player implements Entity{
 		Graphics g = sprite.getGraphics();
 		g.setColor(Color.blue);
 		g.fillRect(0, 0, Engine.SQUARE_DIMENSION, Engine.SQUARE_DIMENSION);
+		movementFrame = 0;
+	}
+	
+	public int getMovementFrame(){
+		return movementFrame;
+	}
+	
+	public void nextMovementFrame(){
+		movementFrame = movementFrame < 9 ? movementFrame+1 : 0;
 	}
 	
 	@Override
 	public BufferedImage getImage() {
+		//return some array[movementFrame], where some array is the
+		//array holding the frames for this direction of movement.
 		return sprite;
 	}
 
