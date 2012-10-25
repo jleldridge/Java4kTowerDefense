@@ -27,13 +27,12 @@ public class Engine {
 		gameArea[player.getY()][player.getX()] = player;
 
 		// for testing positioning of entities on the grid
-		// gameArea[0][0] = new Wall(0, 0);
-		// gameArea[1][5] = new Wall(1, 5);
-		// gameArea[7][1] = new Wall(7, 1);
-		// gameArea[7][8] = new Wall(7, 8);
-		// gameArea[8][7] = new Wall(8, 7);
-		// gameArea[GRID_HEIGHT-1][GRID_WIDTH-1] = new Wall(GRID_HEIGHT-1,
-		// GRID_WIDTH-1);
+//		gameArea[0][0] = new Wall(0, 0);
+//		gameArea[1][5] = new Wall(1, 5);
+//		gameArea[7][1] = new Wall(7, 1);
+//		gameArea[7][8] = new Wall(7, 8);
+//		gameArea[8][7] = new Wall(8, 7);
+//		gameArea[GRID_HEIGHT-1][GRID_WIDTH-1] = new Wall(GRID_HEIGHT-1, GRID_WIDTH-1);
 
 	}
 
