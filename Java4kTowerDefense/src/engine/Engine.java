@@ -13,7 +13,7 @@ public class Engine {
 	public final static int GRID_WIDTH = 800 / 25;
 	// HashSet which holds the keys that are currently down.
 	Stack<Integer> keysDown;
-	Entity[][] gameArea;
+	Viewable[][] gameArea;
 	Player player;
 
 	public Engine() {
