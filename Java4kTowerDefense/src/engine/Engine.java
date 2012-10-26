@@ -11,8 +11,9 @@ public class Engine {
 	public final static int SQUARE_DIMENSION = 25;
 	public final static int GRID_HEIGHT = 600 / 25;
 	public final static int GRID_WIDTH = 800 / 25;
-	// HashSet which holds the keys that are currently down.
+	// stack which holds the keys that are currently down.
 	Stack<Integer> keysDown;
+	//will change this to type tile when that class is created.
 	Viewable[][] gameArea;
 	Player player;
 
