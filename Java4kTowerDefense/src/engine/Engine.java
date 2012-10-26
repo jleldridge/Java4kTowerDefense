@@ -5,9 +5,7 @@ import java.awt.event.KeyEvent;
 import java.util.HashSet;
 import java.util.Stack;
 
-import model.Entity;
-import model.Player;
-import model.Wall;
+import model.*;
 
 public class Engine {
 	public final static int SQUARE_DIMENSION = 25;
