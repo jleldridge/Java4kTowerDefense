@@ -1,5 +1,8 @@
 package model;
 
+/**
+ * generic terrain object (i.e.: a wall) 
+ */
 abstract class Terrain implements Viewable {
 	// fields
 	// are entities able to cross a given terrain type?
