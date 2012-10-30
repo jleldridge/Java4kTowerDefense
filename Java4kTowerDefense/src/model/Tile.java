@@ -6,11 +6,14 @@ package model;
 public class Tile {
 	// fields
 	Terrain terr;
-	
+	Entity ent;
+	Effect eff;
 	
 	// constructor
-	Tile(Terrain terr) {
+	Tile(Terrain terr, Entity ent, Effect eff) {
 		this.terr = terr;
+		this.ent = ent;
+		this.eff = eff;
 	}
 	
 	// setter/getters
