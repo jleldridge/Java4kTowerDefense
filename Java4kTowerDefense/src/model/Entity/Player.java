@@ -16,7 +16,7 @@ public class Player extends Entity{
 		sprite = new BufferedImage(Engine.SQUARE_DIMENSION, Engine.SQUARE_DIMENSION, BufferedImage.TYPE_INT_RGB);
 		Graphics g = sprite.getGraphics();
 		g.setColor(Color.blue);
-		g.fillRect(0, 0, Engine.SQUARE_DIMENSION, Engine.SQUARE_DIMENSION);
+		g.fillRect(12, 12, Engine.SQUARE_DIMENSION/2, Engine.SQUARE_DIMENSION/2);
 		movementFrame = 0;
 	}
 	
