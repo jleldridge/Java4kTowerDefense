@@ -20,7 +20,9 @@ public class Grass extends Terrain {
 		sprite = new BufferedImage(Engine.SQUARE_DIMENSION, Engine.SQUARE_DIMENSION, BufferedImage.TYPE_INT_RGB);
 		Graphics g = sprite.getGraphics();
 		g.setColor(Color.GREEN);
-		g.fillRect(0, 0, Engine.SQUARE_DIMENSION, Engine.SQUARE_DIMENSION);
+		// testing -- start at 2,2 for 'grid' effect
+		g.fillRect(2, 2, Engine.SQUARE_DIMENSION, Engine.SQUARE_DIMENSION);
+		//g.fillRect(0, 0, Engine.SQUARE_DIMENSION, Engine.SQUARE_DIMENSION);
 	}
 	
 	public Grass(int x, int y) {
@@ -29,7 +31,9 @@ public class Grass extends Terrain {
 		sprite = new BufferedImage(Engine.SQUARE_DIMENSION, Engine.SQUARE_DIMENSION, BufferedImage.TYPE_INT_RGB);
 		Graphics g = sprite.getGraphics();
 		g.setColor(Color.GREEN);
-		g.fillRect(0, 0, Engine.SQUARE_DIMENSION, Engine.SQUARE_DIMENSION);
+		// testing -- start at 2,2 for 'grid' effect
+		g.fillRect(2, 2, Engine.SQUARE_DIMENSION, Engine.SQUARE_DIMENSION);
+		//g.fillRect(0, 0, Engine.SQUARE_DIMENSION, Engine.SQUARE_DIMENSION);
 	}
 	
 	// getters
