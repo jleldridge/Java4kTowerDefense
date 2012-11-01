@@ -1,13 +1,14 @@
 package engine;
-
+import model.*;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.util.HashSet;
 import java.util.Stack;
 
-import model.*;
 import model.Entity.Entity;
 import model.Entity.Player;
+import model.Terrain.Grass;
+
 
 public class Engine {
 	public final static int SQUARE_DIMENSION = 25;
@@ -28,6 +29,8 @@ public class Engine {
 		for(int i = 0; i < gameArea.length; i++){
 			for(int j = 0; j < gameArea[0].length; j++){
 				gameArea[i][j] = new Tile();
+				// testing -- Fill all game tiles with grass
+				gameArea[i][j].getTile().setTerrain(new Grass(i, j));
 			}
 		}
 		gameArea[player.getY()][player.getX()].setEntity(player);
@@ -77,9 +80,17 @@ public class Engine {
 	public void render(Graphics g) {
 		for (int i = 0; i < GRID_HEIGHT; i++) {
 			for (int j = 0; j < GRID_WIDTH; j++) {
+				//testing -- Check if tile has terrain, effect, or player, and render respectively
+				if (gameArea[i][j].getTerrain() != null)
+					g.drawImage(gameArea[i][j].getTerrain().getImage(),
+							SQUARE_DIMENSION * j, SQUARE_DIMENSION * i, null);
+				if (gameArea[i][j].getEffect() != null)
+					g.drawImage(gameArea[i][j].getEffect().getImage(),
+							SQUARE_DIMENSION * j, SQUARE_DIMENSION * i, null);
 				if (gameArea[i][j].getEntity() != null)
 					g.drawImage(gameArea[i][j].getEntity().getImage(),
 							SQUARE_DIMENSION * j, SQUARE_DIMENSION * i, null);
+			
 			}
 		}
 	}
