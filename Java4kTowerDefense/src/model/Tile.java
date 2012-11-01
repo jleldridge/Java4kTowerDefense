@@ -19,5 +19,8 @@ public class Tile {
 	// setter/getters
 	public void setTerrain(Terrain terr) { this.terr = terr; }
 	public Terrain getTerrain() { return this.terr; }
-	
+	public void setEntity(Entity ent) { this.ent = ent; }
+	public Entity getEntity() { return this.ent; }
+	public void setEffect(Effect eff) { this.eff = eff; }
+	public Effect getEffect() { return this.eff; }
 }
