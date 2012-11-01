@@ -33,4 +33,5 @@ public class Tile {
 	public Entity getEntity() { return this.ent; }
 	public void setEffect(Effect eff) { this.eff = eff; }
 	public Effect getEffect() { return this.eff; }
+	public Tile getTile() { return this; }
 }
