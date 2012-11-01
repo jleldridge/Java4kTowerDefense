@@ -6,6 +6,8 @@ import java.util.HashSet;
 import java.util.Stack;
 
 import model.*;
+import model.Entity.Entity;
+import model.Entity.Player;
 
 public class Engine {
 	public final static int SQUARE_DIMENSION = 25;

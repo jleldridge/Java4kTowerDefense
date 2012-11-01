@@ -1,9 +1,11 @@
-package model;
+package model.Terrain;
+
+import model.Viewable;
 
 /**
  * generic terrain object (i.e.: a wall) 
  */
-abstract class Terrain implements Viewable {
+public abstract class Terrain implements Viewable {
 	// fields
 	// are entities able to cross a given terrain type?
 	public boolean traversable;

@@ -1,6 +1,8 @@
-package model;
+package model.Entity;
 
 import java.awt.image.BufferedImage;
+
+import model.Viewable;
 
 public abstract class Entity implements Viewable {
 	private int x, y;

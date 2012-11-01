@@ -1,5 +1,9 @@
 package model;
 
+import model.Effect.Effect;
+import model.Entity.Entity;
+import model.Terrain.Terrain;
+
 /**
  * generic Tile object consisting of a terrain, entity, and effect.
  */

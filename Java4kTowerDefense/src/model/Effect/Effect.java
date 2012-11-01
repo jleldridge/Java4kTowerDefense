@@ -1,9 +1,11 @@
-package model;
+package model.Effect;
+
+import model.Viewable;
 
 /**
  * generic effect object (i.e.: a spell) 
  */
-abstract class Effect implements Viewable {
+public abstract class Effect implements Viewable {
 	// fields
 	private int x, y;
 	
