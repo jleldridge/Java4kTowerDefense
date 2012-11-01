@@ -16,25 +16,22 @@ public class Engine {
 	// stack which holds the keys that are currently down.
 	Stack<Integer> keysDown;
 	//will change this to type tile when that class is created.
-	Viewable[][] gameArea;
+	Tile[][] gameArea;
 	Player player;
 
 	public Engine() {
 		// going to fill the grid with Tile types once that class is created
-		gameArea = new Entity[GRID_HEIGHT][GRID_WIDTH];
+		gameArea = new Tile[GRID_HEIGHT][GRID_WIDTH];
 		keysDown = new Stack<Integer>();
 		player = new Player();
-		gameArea[player.getY()][player.getX()] = player;
-
-		// for testing positioning of entities on the grid
-		// gameArea[0][0] = new Wall(0, 0);
-		// gameArea[1][5] = new Wall(1, 5);
-		// gameArea[7][1] = new Wall(7, 1);
-		// gameArea[7][8] = new Wall(7, 8);
-		// gameArea[8][7] = new Wall(8, 7);
-		// gameArea[GRID_HEIGHT-1][GRID_WIDTH-1] = new Wall(GRID_HEIGHT-1,
-		// GRID_WIDTH-1);
-
+		
+		for(int i = 0; i < gameArea.length; i++){
+			for(int j = 0; j < gameArea[0].length; j++){
+				gameArea[i][j] = new Tile();
+			}
+		}
+		gameArea[player.getY()][player.getX()].setEntity(player);
+		
 	}
 
 	public void update() {
@@ -59,13 +56,13 @@ public class Engine {
 		//sprite
 		if (player.getMovementFrame() == 9) {
 			// delete the player's old position on the grid
-			gameArea[player.getY()][player.getX()] = null;
+			gameArea[player.getY()][player.getX()].setEntity(null);
 			
 			player.setX(player.getX() + player.getDx());
 			player.setY(player.getY() + player.getDy());
 
 			// place the player onto the grid based on its new x and y values
-			gameArea[player.getY()][player.getX()] = player;
+			gameArea[player.getY()][player.getX()].setEntity(player);
 
 			// reset the action states of the player
 			player.setDx(0);
@@ -80,8 +77,8 @@ public class Engine {
 	public void render(Graphics g) {
 		for (int i = 0; i < GRID_HEIGHT; i++) {
 			for (int j = 0; j < GRID_WIDTH; j++) {
-				if (gameArea[i][j] != null)
-					g.drawImage(gameArea[i][j].getImage(),
+				if (gameArea[i][j].getEntity() != null)
+					g.drawImage(gameArea[i][j].getEntity().getImage(),
 							SQUARE_DIMENSION * j, SQUARE_DIMENSION * i, null);
 			}
 		}
