@@ -1,9 +1,5 @@
 package model;
 
-import model.Effect.Effect;
-import model.Entity.Entity;
-import model.Terrain.Terrain;
-
 /**
  * generic Tile object consisting of a terrain, entity, and effect.
  */
@@ -14,13 +10,13 @@ public class Tile {
 	Effect eff;
 	
 	// constructor
-	Tile() {
+	public Tile() {
 		this.terr = null;
 		this.ent = null;
 		this.eff = null;
 	}
 	
-	Tile(Terrain terr, Entity ent, Effect eff) {
+	public Tile(Terrain terr, Entity ent, Effect eff) {
 		this.terr = terr;
 		this.ent = ent;
 		this.eff = eff;
