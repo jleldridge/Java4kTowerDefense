@@ -1,0 +1,8 @@
+-Free player and mobs from specific slots on the grid
+-Implement a projectile spell, an area effect spell, a field spell, and "rune"
+  type spells
+-Implement terrain checks in main loop.
+*-Create a map builder
+*-Remove "Entity" from the tiles
+-Create some "effects" for tiles
+*-create some mobs
