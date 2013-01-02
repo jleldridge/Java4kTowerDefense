@@ -33,7 +33,6 @@ public class Engine {
 				gameArea[i][j].getTile().setTerrain(new Grass(i, j));
 			}
 		}
-		gameArea[player.getY()][player.getX()].setEntity(player);
 		
 	}
 
@@ -45,27 +44,21 @@ public class Engine {
 			code = keysDown.peek();
 		}
 		if (code == KeyEvent.VK_LEFT) {
-			player.setDx(-1);
+			player.setDx(-12);
 		} else if (code == KeyEvent.VK_RIGHT) {
-			player.setDx(1);
+			player.setDx(12);
 		} else if (code == KeyEvent.VK_UP) {
-			player.setDy(-1);
+			player.setDy(-12);
 		} else if (code == KeyEvent.VK_DOWN) {
-			player.setDy(1);
+			player.setDy(12);
 		}
 
 		//set the player's position based on the dx and dy values and
 		//only move the player if they're at the end of the movement
 		//sprite
 		if (player.getMovementFrame() == 9) {
-			// delete the player's old position on the grid
-			gameArea[player.getY()][player.getX()].setEntity(null);
-			
 			player.setX(player.getX() + player.getDx());
 			player.setY(player.getY() + player.getDy());
-
-			// place the player onto the grid based on its new x and y values
-			gameArea[player.getY()][player.getX()].setEntity(player);
 
 			// reset the action states of the player
 			player.setDx(0);
@@ -87,12 +80,9 @@ public class Engine {
 				if (gameArea[i][j].getEffect() != null)
 					g.drawImage(gameArea[i][j].getEffect().getImage(),
 							SQUARE_DIMENSION * j, SQUARE_DIMENSION * i, null);
-				if (gameArea[i][j].getEntity() != null)
-					g.drawImage(gameArea[i][j].getEntity().getImage(),
-							SQUARE_DIMENSION * j, SQUARE_DIMENSION * i, null);
-			
 			}
 		}
+		g.drawImage(player.getImage(), player.getX(), player.getY(), null);
 	}
 
 	public void keyPressed(KeyEvent e) {
