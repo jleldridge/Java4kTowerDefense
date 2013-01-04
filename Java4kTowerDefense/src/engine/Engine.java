@@ -2,11 +2,15 @@ package engine;
 import model.*;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Stack;
 
 import model.Entity.Entity;
 import model.Entity.Player;
+import model.Spell.Fireball;
+import model.Spell.Spell;
 import model.Terrain.Grass;
 
 
@@ -18,6 +22,10 @@ public class Engine {
 	Stack<Integer> keysDown;
 	//will change this to type tile when that class is created.
 	Tile[][] gameArea;
+	//array of all spells currently on the field
+	ArrayList<Spell> spells;
+	//array of all mobs currently on the field
+	ArrayList<Entity> mobs;
 	Player player;
 
 	public Engine() {
@@ -25,6 +33,8 @@ public class Engine {
 		gameArea = new Tile[GRID_HEIGHT][GRID_WIDTH];
 		keysDown = new Stack<Integer>();
 		player = new Player();
+		spells = new ArrayList<Spell>();
+		mobs = new ArrayList<Entity>();
 		
 		for(int i = 0; i < gameArea.length; i++){
 			for(int j = 0; j < gameArea[0].length; j++){
@@ -37,6 +47,10 @@ public class Engine {
 	}
 
 	public void update() {
+		//reduce the spell cooldown timer
+		if(player.getSpellCooldown() > 0){
+			player.setSpellCooldown(player.getSpellCooldown()-1);
+		}
 		// check which key is the latest one pressed and still down and
 		// modify the player's action states appropriately
 		int code = 0;
@@ -51,8 +65,12 @@ public class Engine {
 			player.setDy(-12);
 		} else if (code == KeyEvent.VK_DOWN) {
 			player.setDy(12);
+		} else if(code == KeyEvent.VK_1){
+			if(player.getSpellCooldown() <= 0){
+				spells.add(new Fireball(player.getX()+6, player.getY()+3, 5, 0, 120));
+				player.setSpellCooldown(60);
+			}
 		}
-
 		//set the player's position based on the dx and dy values and
 		//only move the player if they're at the end of the movement
 		//sprite
@@ -67,6 +85,18 @@ public class Engine {
 		}	
 		else if(player.getDx() != 0 || player.getDy() != 0){
 			player.nextMovementFrame();
+		}
+		
+		//change state of spells
+		Iterator<Spell> iter = spells.iterator();
+		while(iter.hasNext()){
+			Spell spell = iter.next();
+			spell.setX(spell.getX()+spell.getDx());
+			spell.setY(spell.getY()+spell.getDy());
+			spell.setDuration(spell.getDuration()-1);
+			if(spell.getDuration() <= 0){
+				iter.remove();
+			}
 		}
 	}
 
@@ -83,6 +113,12 @@ public class Engine {
 			}
 		}
 		g.drawImage(player.getImage(), player.getX(), player.getY(), null);
+		
+		//render the spells
+		for(int i = 0; i < spells.size(); i++){
+			Spell spell = spells.get(i);
+			g.drawImage(spell.getSprite(), spell.getX(), spell.getY(), null);
+		}
 	}
 
 	public void keyPressed(KeyEvent e) {

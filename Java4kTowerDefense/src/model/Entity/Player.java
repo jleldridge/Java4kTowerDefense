@@ -9,6 +9,7 @@ import engine.Engine;
 public class Player extends Entity{
 	private BufferedImage sprite;
 	private int movementFrame;
+	private int spellCooldown;
 	
 	public Player(){
 		setX(0);
@@ -18,6 +19,7 @@ public class Player extends Entity{
 		g.setColor(Color.blue);
 		g.fillRect(6, 6, Engine.SQUARE_DIMENSION/2, Engine.SQUARE_DIMENSION/2);
 		movementFrame = 0;
+		spellCooldown = 0;
 	}
 	
 	public int getMovementFrame(){
@@ -33,5 +35,13 @@ public class Player extends Entity{
 		//return some array[movementFrame], where some array is the
 		//array holding the frames for this direction of movement.
 		return sprite;
+	}
+
+	public int getSpellCooldown() {
+		return spellCooldown;
+	}
+
+	public void setSpellCooldown(int spellCooldown) {
+		this.spellCooldown = spellCooldown;
 	}
 }
