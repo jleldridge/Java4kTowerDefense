@@ -2,18 +2,11 @@ package engine;
 import model.*;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Stack;
+import java.util.*;
 
-import model.Entity.Entity;
-import model.Entity.Player;
-import model.Spell.Fireball;
-import model.Spell.RuneTrap;
-import model.Spell.Spell;
-import model.Spell.TimeField;
-import model.Terrain.Grass;
+import model.Entity.*;
+import model.Spell.*;
+import model.Terrain.*;
 
 
 public class Engine {
@@ -43,7 +36,6 @@ public class Engine {
 				gameArea[i][j].getTile().setTerrain(new Grass(i, j));
 			}
 		}
-		
 	}
 
 	public void update() {
@@ -67,7 +59,7 @@ public class Engine {
 			player.setDy(12);
 		} else if(code == KeyEvent.VK_1){
 			if(player.getSpellCooldown() <= 0){
-				spells.add(new Fireball(player.getX()+6, player.getY()+3, 5, 0, 120));
+				spells.add(new Fireball(player.getX()+6, player.getY()+3, 5, 0, 60));
 				player.setSpellCooldown(60);
 			}
 		} else if(code == KeyEvent.VK_2){
@@ -98,14 +90,35 @@ public class Engine {
 		}
 		
 		//change state of spells
-		Iterator<Spell> iter = spells.iterator();
+		Iterator iter = spells.iterator();
 		while(iter.hasNext()){
-			Spell spell = iter.next();
+			Spell spell = (Spell)iter.next();
 			spell.setX(spell.getX()+spell.getDx());
 			spell.setY(spell.getY()+spell.getDy());
 			spell.setDuration(spell.getDuration()-1);
 			if(spell.getDuration() <= 0){
 				iter.remove();
+			}
+		}
+		
+		//check for collisions between mobs and spells
+		iter = mobs.iterator();
+		while(iter.hasNext()){
+			Entity mob = (Entity)iter.next();
+			
+			Iterator<Spell> spellIter = spells.iterator();
+			while(spellIter.hasNext()){
+				Spell spell = spellIter.next();
+				if(mob.getX() + mob.getSize() >= spell.getX() && mob.getX() <= spell.getX() + spell.getSize()){
+					if(mob.getY() + mob.getSize() >= spell.getY() && mob.getY() <= spell.getY() + spell.getSize()){
+						//handle spells colliding with mobs
+					}
+				}
+			}
+			if(mob.getX() + mob.getSize() >= player.getX() && mob.getX() <= player.getX() + player.getSize()){
+				if(mob.getY() + mob.getSize() >= player.getY() && mob.getY() <= player.getY() + player.getSize()){
+					//handle mobs colliding with player
+				}
 			}
 		}
 	}
