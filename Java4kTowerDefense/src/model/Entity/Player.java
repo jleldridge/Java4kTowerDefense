@@ -14,10 +14,11 @@ public class Player extends Entity{
 	public Player(){
 		setX(0);
 		setY(0);
-		sprite = new BufferedImage(Engine.SQUARE_DIMENSION, Engine.SQUARE_DIMENSION, BufferedImage.TYPE_INT_RGB);
+		setSize(25);
+		sprite = new BufferedImage(getSize(), getSize(), BufferedImage.TYPE_INT_RGB);
 		Graphics g = sprite.getGraphics();
 		g.setColor(Color.blue);
-		g.fillRect(6, 6, Engine.SQUARE_DIMENSION/2, Engine.SQUARE_DIMENSION/2);
+		g.fillRect(0, 0, getSize(), getSize());
 		movementFrame = 0;
 		spellCooldown = 0;
 	}

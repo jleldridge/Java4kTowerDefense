@@ -11,11 +11,12 @@ public class Fireball extends Spell{
 		setDx(dx);
 		setDy(dy);
 		setDuration(duration);
+		setSize(15);
 		
-		BufferedImage sprite = new BufferedImage(15, 15, BufferedImage.TYPE_INT_RGB);
+		BufferedImage sprite = new BufferedImage(getSize(), getSize(), BufferedImage.TYPE_INT_RGB);
 		Graphics g = sprite.getGraphics();
 		g.setColor(Color.red);
-		g.fillOval(0, 0, 15, 15);
+		g.fillOval(0, 0, getSize(), getSize());
 		setSprite(sprite);
 	}
 }

@@ -10,7 +10,9 @@ import java.util.Stack;
 import model.Entity.Entity;
 import model.Entity.Player;
 import model.Spell.Fireball;
+import model.Spell.RuneTrap;
 import model.Spell.Spell;
+import model.Spell.TimeField;
 import model.Terrain.Grass;
 
 
@@ -22,9 +24,7 @@ public class Engine {
 	Stack<Integer> keysDown;
 	//will change this to type tile when that class is created.
 	Tile[][] gameArea;
-	//array of all spells currently on the field
 	ArrayList<Spell> spells;
-	//array of all mobs currently on the field
 	ArrayList<Entity> mobs;
 	Player player;
 
@@ -68,6 +68,16 @@ public class Engine {
 		} else if(code == KeyEvent.VK_1){
 			if(player.getSpellCooldown() <= 0){
 				spells.add(new Fireball(player.getX()+6, player.getY()+3, 5, 0, 120));
+				player.setSpellCooldown(60);
+			}
+		} else if(code == KeyEvent.VK_2){
+			if(player.getSpellCooldown() <= 0){
+				spells.add(new RuneTrap(player.getX(), player.getY(), 600));
+				player.setSpellCooldown(60);
+			}
+		} else if(code == KeyEvent.VK_3){
+			if(player.getSpellCooldown() <= 0){
+				spells.add(new TimeField(player.getX()-25, player.getY()-25, 600));
 				player.setSpellCooldown(60);
 			}
 		}

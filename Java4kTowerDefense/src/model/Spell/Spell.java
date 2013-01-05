@@ -4,10 +4,13 @@ import java.awt.image.BufferedImage;
 
 public abstract class Spell {
 	private int duration;
+	private int size;
 	//position
 	private int x, y;
 	//speed
 	private int dx, dy;
+	//sprite
+	private BufferedImage sprite;
 	
 	public int getDuration() {
 		return duration;
@@ -39,14 +42,16 @@ public abstract class Spell {
 	public void setDy(int dy) {
 		this.dy = dy;
 	}
+	public void setSize(int size){
+		this.size = size;
+	}
+	public int getSize(){
+		return size;
+	}
 	public BufferedImage getSprite() {
 		return sprite;
 	}
 	public void setSprite(BufferedImage sprite) {
 		this.sprite = sprite;
 	}
-	//sprite
-	private BufferedImage sprite;
-	
-	
 }

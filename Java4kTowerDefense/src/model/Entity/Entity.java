@@ -5,9 +5,11 @@ import java.awt.image.BufferedImage;
 import model.Viewable;
 
 public abstract class Entity implements Viewable {
+	//player's position
 	private int x, y;
 	//the player's "speed" in x and y directions
 	private int dx, dy;
+	private int size;
 	
 	@Override
 	public int getX() {
@@ -43,6 +45,14 @@ public abstract class Entity implements Viewable {
 
 	public void setDy(int dy) {
 		this.dy = dy;
+	}
+
+	public int getSize() {
+		return size;
+	}
+
+	public void setSize(int size) {
+		this.size = size;
 	}
 }
 
