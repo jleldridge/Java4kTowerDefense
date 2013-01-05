@@ -10,6 +10,7 @@ public class Player extends Entity{
 	private BufferedImage sprite;
 	private int movementFrame;
 	private int spellCooldown;
+	private char direction;
 	
 	public Player(){
 		setX(0);
@@ -21,6 +22,7 @@ public class Player extends Entity{
 		g.fillRect(0, 0, getSize(), getSize());
 		movementFrame = 0;
 		spellCooldown = 0;
+		direction = 'd';
 	}
 	
 	public int getMovementFrame(){
@@ -44,5 +46,13 @@ public class Player extends Entity{
 
 	public void setSpellCooldown(int spellCooldown) {
 		this.spellCooldown = spellCooldown;
+	}
+
+	public char getDirection() {
+		return direction;
+	}
+
+	public void setDirection(char direction) {
+		this.direction = direction;
 	}
 }

@@ -11,8 +11,8 @@ import model.Terrain.*;
 
 public class Engine {
 	public final static int SQUARE_DIMENSION = 25;
-	public final static int GRID_HEIGHT = 600 / 25;
-	public final static int GRID_WIDTH = 800 / 25;
+	public final static int GRID_HEIGHT = 600 / SQUARE_DIMENSION;
+	public final static int GRID_WIDTH = 800 / SQUARE_DIMENSION;
 	// stack which holds the keys that are currently down.
 	Stack<Integer> keysDown;
 	//will change this to type tile when that class is created.
@@ -51,15 +51,27 @@ public class Engine {
 		}
 		if (code == KeyEvent.VK_LEFT) {
 			player.setDx(-12);
+			player.setDirection('l');
 		} else if (code == KeyEvent.VK_RIGHT) {
 			player.setDx(12);
+			player.setDirection('r');
 		} else if (code == KeyEvent.VK_UP) {
 			player.setDy(-12);
+			player.setDirection('u');
 		} else if (code == KeyEvent.VK_DOWN) {
 			player.setDy(12);
+			player.setDirection('d');
 		} else if(code == KeyEvent.VK_1){
 			if(player.getSpellCooldown() <= 0){
-				spells.add(new Fireball(player.getX()+6, player.getY()+3, 5, 0, 60));
+				if(player.getDirection() == 'r'){
+					spells.add(new Fireball(player.getX()+6, player.getY()+3, 5, 0, 60));
+				} else if(player.getDirection() == 'l'){
+					spells.add(new Fireball(player.getX()+6, player.getY()+3, -5, 0, 60));
+				} else if(player.getDirection() == 'u'){
+					spells.add(new Fireball(player.getX()+6, player.getY()+3, 0, -5, 60));
+				} else if(player.getDirection() == 'd'){
+					spells.add(new Fireball(player.getX()+6, player.getY()+3, 0, 5, 60));
+				}
 				player.setSpellCooldown(60);
 			}
 		} else if(code == KeyEvent.VK_2){
@@ -101,20 +113,23 @@ public class Engine {
 			}
 		}
 		
-		//check for collisions between mobs and spells
+		//check for mob collisions
 		iter = mobs.iterator();
 		while(iter.hasNext()){
 			Entity mob = (Entity)iter.next();
 			
+			//check for collisions between mobs and spells
 			Iterator<Spell> spellIter = spells.iterator();
 			while(spellIter.hasNext()){
 				Spell spell = spellIter.next();
 				if(mob.getX() + mob.getSize() >= spell.getX() && mob.getX() <= spell.getX() + spell.getSize()){
 					if(mob.getY() + mob.getSize() >= spell.getY() && mob.getY() <= spell.getY() + spell.getSize()){
-						//handle spells colliding with mobs
+						//handle mobs colliding with spells
 					}
 				}
 			}
+			
+			//check for collisions between mobs and the player
 			if(mob.getX() + mob.getSize() >= player.getX() && mob.getX() <= player.getX() + player.getSize()){
 				if(mob.getY() + mob.getSize() >= player.getY() && mob.getY() <= player.getY() + player.getSize()){
 					//handle mobs colliding with player
