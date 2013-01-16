@@ -1,0 +1,10 @@
+-Free player and mobs from specific slots on the grid
+-Implement a projectile spell, an area effect spell, a field spell, and "rune"
+  type spells
+-Implement terrain checks in main loop.
+*-Create a map builder
+*-Remove "Entity" from the tiles
+    Why specifically do we want to remove entities from the tile objects? Is this because we want to be able to have multiple entities on a given tile. In which case we could make an array list of of entities for the tiles. Otherwise, we need to redo some of the stuff in the engine. 
+-Create some "effects" for tiles
+*-create some mobs
+    I've added a bat, goblin, and blob for the time being. I was thinking, should we add an 'isFlying' boolean for entities? Could make for some interesting game dynamics in the future.

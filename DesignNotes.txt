@@ -1,0 +1,10 @@
+Map Creation -- 1 Nov 2012
+
+Thoughts on how to represent ponential contents of a Tile object during map construction. Utilizing 4 bits per object (Terrain, Effect, and Entity) will leave us with 15 possible types of each and an additional 4 bits on the high end for future expansion.
+
+Using a char will give us two bytes.
+
+bits 	0-3		4-7		8-11		12-15
+
+type	terrain		effect		entity		future expansion
+
