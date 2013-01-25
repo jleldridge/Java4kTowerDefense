@@ -6,53 +6,25 @@ import java.awt.image.BufferedImage;
 
 import engine.Engine;
 
-public class Player extends Entity{
-	private BufferedImage sprite;
-	private int movementFrame;
-	private int spellCooldown;
-	private char direction;
+public class Player{
+	public int x, y, dx, dy, size; 
 	
+	public BufferedImage sprite;
+	public int spellCooldown;
+	public char direction;
+	
+
 	public Player(){
-		setX(0);
-		setY(0);
-		setSize(25);
-		sprite = new BufferedImage(getSize(), getSize(), BufferedImage.TYPE_INT_RGB);
+		this.x=0;
+		this.y=0;
+		size=25;
+		sprite = new BufferedImage(this.size, this.size, 
+				BufferedImage.TYPE_INT_RGB);
 		Graphics g = sprite.getGraphics();
 		g.setColor(Color.blue);
-		g.fillRect(0, 0, getSize(), getSize());
-		movementFrame = 0;
+		g.fillRect(0, 0, this.size, this.size);
 		spellCooldown = 0;
 		direction = 'd';
 	}
 	
-	public int getMovementFrame(){
-		return movementFrame;
-	}
-	
-	public void nextMovementFrame(){
-		movementFrame = movementFrame < 9 ? movementFrame+1 : 0;
-	}
-	
-	@Override
-	public BufferedImage getImage() {
-		//return some array[movementFrame], where some array is the
-		//array holding the frames for this direction of movement.
-		return sprite;
-	}
-
-	public int getSpellCooldown() {
-		return spellCooldown;
-	}
-
-	public void setSpellCooldown(int spellCooldown) {
-		this.spellCooldown = spellCooldown;
-	}
-
-	public char getDirection() {
-		return direction;
-	}
-
-	public void setDirection(char direction) {
-		this.direction = direction;
-	}
 }

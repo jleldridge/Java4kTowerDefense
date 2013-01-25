@@ -6,15 +6,15 @@ import java.awt.image.BufferedImage;
 
 public class TimeField extends Spell{
 	public TimeField(int x, int y, int duration){
-		setX(x);
-		setY(y);
-		setDuration(duration);
-		setSize(75);
+		this.x = x;
+		this.y = y;
+		this.duration = duration;
+		this.size = 75;
 		
-		BufferedImage sprite = new BufferedImage(getSize(), getSize(), BufferedImage.TYPE_INT_RGB);
+		BufferedImage sprite = new BufferedImage(75, 75, BufferedImage.TYPE_INT_RGB);
 		Graphics g = sprite.getGraphics();
 		g.setColor(Color.magenta);
-		g.fillOval(0, 0, getSize(), getSize());
-		setSprite(sprite);
+		g.fillOval(0, 0, 75, 75);
+		this.sprite = sprite;
 	}
 }

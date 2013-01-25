@@ -40,8 +40,8 @@ public class Engine {
 
 	public void update() {
 		//reduce the spell cooldown timer
-		if(player.getSpellCooldown() > 0){
-			player.setSpellCooldown(player.getSpellCooldown()-1);
+		if(player.spellCooldown > 0){
+			player.spellCooldown -= 1;
 		}
 		// check which key is the latest one pressed and still down and
 		// modify the player's action states appropriately
@@ -50,65 +50,60 @@ public class Engine {
 			code = keysDown.peek();
 		}
 		if (code == KeyEvent.VK_LEFT) {
-			player.setDx(-12);
-			player.setDirection('l');
+			player.dx = -1;
+			player.direction = 'l';
 		} else if (code == KeyEvent.VK_RIGHT) {
-			player.setDx(12);
-			player.setDirection('r');
+			player.dx = 1;
+			player.direction = 'r';
 		} else if (code == KeyEvent.VK_UP) {
-			player.setDy(-12);
-			player.setDirection('u');
+			player.dy = -1;
+			player.direction = 'u';
 		} else if (code == KeyEvent.VK_DOWN) {
-			player.setDy(12);
-			player.setDirection('d');
+			player.dy = 1;
+			player.direction = 'd';
 		} else if(code == KeyEvent.VK_1){
-			if(player.getSpellCooldown() <= 0){
-				if(player.getDirection() == 'r'){
-					spells.add(new Fireball(player.getX()+6, player.getY()+3, 5, 0, 60));
-				} else if(player.getDirection() == 'l'){
-					spells.add(new Fireball(player.getX()+6, player.getY()+3, -5, 0, 60));
-				} else if(player.getDirection() == 'u'){
-					spells.add(new Fireball(player.getX()+6, player.getY()+3, 0, -5, 60));
-				} else if(player.getDirection() == 'd'){
-					spells.add(new Fireball(player.getX()+6, player.getY()+3, 0, 5, 60));
+			if(player.spellCooldown <= 0){
+				if(player.direction == 'r'){
+					spells.add(new Fireball(player.x+6, player.y+3, 5, 0, 60));
+				} else if(player.direction == 'l'){
+					spells.add(new Fireball(player.x+6, player.y+3, -5, 0, 60));
+				} else if(player.direction == 'u'){
+					spells.add(new Fireball(player.x+6, player.y+3, 0, -5, 60));
+				} else if(player.direction == 'd'){
+					spells.add(new Fireball(player.x+6, player.y+3, 0, 5, 60));
 				}
-				player.setSpellCooldown(60);
+				player.spellCooldown = 60;
 			}
 		} else if(code == KeyEvent.VK_2){
-			if(player.getSpellCooldown() <= 0){
-				spells.add(new RuneTrap(player.getX(), player.getY(), 600));
-				player.setSpellCooldown(60);
+			if(player.spellCooldown <= 0){
+				spells.add(new RuneTrap(player.x, player.y, 600));
+				player.spellCooldown = 60;
 			}
 		} else if(code == KeyEvent.VK_3){
-			if(player.getSpellCooldown() <= 0){
-				spells.add(new TimeField(player.getX()-25, player.getY()-25, 600));
-				player.setSpellCooldown(60);
+			if(player.spellCooldown <= 0){
+				spells.add(new TimeField(player.x-25, player.y-25, 600));
+				player.spellCooldown = 60;
 			}
 		}
 		//set the player's position based on the dx and dy values and
 		//only move the player if they're at the end of the movement
 		//sprite
-		if (player.getMovementFrame() == 9) {
-			player.setX(player.getX() + player.getDx());
-			player.setY(player.getY() + player.getDy());
 
-			// reset the action states of the player
-			player.setDx(0);
-			player.setDy(0);
-			player.nextMovementFrame();
-		}	
-		else if(player.getDx() != 0 || player.getDy() != 0){
-			player.nextMovementFrame();
-		}
+		player.x += player.dx;
+		player.y += player.dy;
+
+		// reset the action states of the player
+		player.dx = 0;
+		player.dy = 0;
 		
 		//change state of spells
 		Iterator iter = spells.iterator();
 		while(iter.hasNext()){
 			Spell spell = (Spell)iter.next();
-			spell.setX(spell.getX()+spell.getDx());
-			spell.setY(spell.getY()+spell.getDy());
-			spell.setDuration(spell.getDuration()-1);
-			if(spell.getDuration() <= 0){
+			spell.x += spell.dx;
+			spell.y += spell.dy;
+			spell.duration -= 1;
+			if(spell.duration <= 0){
 				iter.remove();
 			}
 		}
@@ -122,16 +117,16 @@ public class Engine {
 			Iterator<Spell> spellIter = spells.iterator();
 			while(spellIter.hasNext()){
 				Spell spell = spellIter.next();
-				if(mob.getX() + mob.getSize() >= spell.getX() && mob.getX() <= spell.getX() + spell.getSize()){
-					if(mob.getY() + mob.getSize() >= spell.getY() && mob.getY() <= spell.getY() + spell.getSize()){
+				if(mob.x + mob.size >= spell.x && mob.x <= spell.x + spell.size){
+					if(mob.y + mob.size >= spell.y && mob.y <= spell.y + spell.size){
 						//handle mobs colliding with spells
 					}
 				}
 			}
 			
 			//check for collisions between mobs and the player
-			if(mob.getX() + mob.getSize() >= player.getX() && mob.getX() <= player.getX() + player.getSize()){
-				if(mob.getY() + mob.getSize() >= player.getY() && mob.getY() <= player.getY() + player.getSize()){
+			if(mob.x + mob.size >= player.x && mob.x <= player.x + player.size){
+				if(mob.y + mob.size >= player.y && mob.y <= player.y + player.size){
 					//handle mobs colliding with player
 				}
 			}
@@ -150,12 +145,12 @@ public class Engine {
 							SQUARE_DIMENSION * j, SQUARE_DIMENSION * i, null);
 			}
 		}
-		g.drawImage(player.getImage(), player.getX(), player.getY(), null);
+		g.drawImage(player.sprite, player.x, player.y, null);
 		
 		//render the spells
 		for(int i = 0; i < spells.size(); i++){
 			Spell spell = spells.get(i);
-			g.drawImage(spell.getSprite(), spell.getX(), spell.getY(), null);
+			g.drawImage(spell.sprite, spell.x, spell.y, null);
 		}
 	}
 

@@ -7,4 +7,9 @@ Using a char will give us two bytes.
 bits 	0-3		4-7		8-11		12-15
 
 type	terrain		effect		entity		future expansion
+aaa
+
+-2 enemy patterns
+	-following player
+	-fixed movement
 
