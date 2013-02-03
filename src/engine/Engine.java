@@ -3,10 +3,10 @@ import model.*;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.util.*;
+import java.awt.Color;
 
 import model.Entity.*;
 import model.Spell.*;
-import model.Terrain.*;
 
 
 public class Engine {
@@ -32,10 +32,11 @@ public class Engine {
 		for(int i = 0; i < gameArea.length; i++){
 			for(int j = 0; j < gameArea[0].length; j++){
 				gameArea[i][j] = new Tile();
-				// testing -- Fill all game tiles with grass
-				gameArea[i][j].terrain = new Grass(i, j);
 			}
 		}
+
+		mobs.add(new Boulder(70, 70));
+		mobs.add(new Boulder(775, 575));
 	}
 
 	public void update() {
@@ -88,13 +89,8 @@ public class Engine {
 		//set the player's position based on the dx and dy values and
 		//only move the player if they're at the end of the movement
 		//sprite
-
-		player.x += player.dx;
+		player.x += player.dx ;
 		player.y += player.dy;
-
-		// reset the action states of the player
-		player.dx = 0;
-		player.dy = 0;
 		
 		//change state of spells
 		Iterator iter = spells.iterator();
@@ -126,27 +122,30 @@ public class Engine {
 			
 			//check for collisions between mobs and the player
 			if(mob.x + mob.size >= player.x && mob.x <= player.x + player.size){
-				if(mob.y + mob.size >= player.y && mob.y <= player.y + player.size){
+				if(mob.y <= player.y + player.size && mob.y + mob.size >= player.y){
 					//handle mobs colliding with player
+					if(mob.solid){
+						player.x -= player.dx;
+						player.y -= player.dy;
+					}
 				}
 			}
 		}
+		// reset the action states of the player
+		player.dx = 0;
+		player.dy = 0;	
 	}
 
 	public void render(Graphics g) {
-		for (int i = 0; i < GRID_HEIGHT; i++) {
-			for (int j = 0; j < GRID_WIDTH; j++) {
-				//testing -- Check if tile has terrain, effect, or player, and render respectively
-				if (gameArea[i][j].terrain != null)
-					g.drawImage(gameArea[i][j].terrain.sprite,
-							SQUARE_DIMENSION * j, SQUARE_DIMENSION * i, null);
-				if (gameArea[i][j].effect != null)
-					g.drawImage(gameArea[i][j].effect.sprite,
-							SQUARE_DIMENSION * j, SQUARE_DIMENSION * i, null);
-			}
-		}
+		g.setColor(Color.green);
+		g.fillRect(0, 0, 800, 600);
+
 		g.drawImage(player.sprite, player.x, player.y, null);
 		
+		for(int i = 0; i < mobs.size(); i++){
+			Entity entity = mobs.get(i);
+			g.drawImage(entity.sprite, entity.drawX, entity.drawY, null);
+		}
 		//render the spells
 		for(int i = 0; i < spells.size(); i++){
 			Spell spell = spells.get(i);
