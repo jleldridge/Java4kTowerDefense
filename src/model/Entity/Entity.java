@@ -2,9 +2,8 @@ package model.Entity;
 
 import java.awt.image.BufferedImage;
 
-import model.Viewable;
-
-public abstract class Entity implements Viewable {
+public abstract class Entity{
+	public BufferedImage sprite;
 	//player's position
 	public int x, y;
 	//the player's "speed" in x and y directions

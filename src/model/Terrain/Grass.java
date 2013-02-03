@@ -7,11 +7,6 @@ import engine.Engine;
 
 public class Grass extends Terrain {
 	
-	// fields
-	private int x, y;
-	private BufferedImage sprite;
-	private boolean traversable = true;
-	private boolean destroyable = false;
 		
 	// constructors
 	public Grass() {
@@ -35,12 +30,4 @@ public class Grass extends Terrain {
 		g.fillRect(2, 2, Engine.SQUARE_DIMENSION, Engine.SQUARE_DIMENSION);
 		//g.fillRect(0, 0, Engine.SQUARE_DIMENSION, Engine.SQUARE_DIMENSION);
 	}
-	
-	// getters
-	@Override
-	public BufferedImage getImage() {
-		return this.sprite;
-	}
-	
-	
 }

@@ -1,26 +1,19 @@
 package model.Terrain;
 
-import model.Viewable;
+import java.awt.image.BufferedImage;
 
 /**
  * generic terrain object (i.e.: a wall) 
  */
-public abstract class Terrain implements Viewable {
+public abstract class Terrain{
 	// fields
 	// are entities able to cross a given terrain type?
 	public boolean traversable;
 	// are spells able to destroy a given terrain type?
 	public boolean destructable;
 	// grid coordinates for a given terrain type
-	private int x, y;
+	public int x, y;
+	public BufferedImage sprite;
 	
-	// setters/getters
-	public int getX() { return this.x; }
-	public void setX(int x) { this.x = x; }
-	public int getY() { return this.y; }
-	public void setY(int y) { this.y = y; }	
-	public boolean getTraversable() { return this.traversable; }
-	public boolean getDestructable() { return this.destructable; }
 }
-
 

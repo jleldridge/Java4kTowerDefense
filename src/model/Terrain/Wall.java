@@ -6,13 +6,6 @@ import java.awt.image.BufferedImage;
 import engine.Engine;
 
 public class Wall extends Terrain {
-
-	// fields
-	private int x, y;
-	private BufferedImage sprite;
-	private boolean traversable = false;
-	private boolean destroyable = false;
-	
 	// constructors
 	public Wall() {
 		x = 0;
@@ -31,13 +24,4 @@ public class Wall extends Terrain {
 		g.setColor(Color.GREEN);
 		g.fillRect(0, 0, Engine.SQUARE_DIMENSION, Engine.SQUARE_DIMENSION);
 	}
-
-	// getters
-	@Override
-	public BufferedImage getImage() {
-		return this.sprite;
-	}
-	
-
-
 }

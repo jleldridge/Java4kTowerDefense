@@ -9,24 +9,17 @@ import model.Terrain.Terrain;
  */
 public class Tile {
 	// fields
-	Terrain terr;
-	Effect eff;
+	public Terrain terrain;
+	public Effect effect;
 	
 	// constructor
 	public Tile() {
-		this.terr = null;
-		this.eff = null;
+		this.terrain = null;
+		this.effect = null;
 	}
 	
 	public Tile(Terrain terr, Effect eff) {
-		this.terr = terr;
-		this.eff = eff;
+		this.terrain = terr;
+		this.effect = eff;
 	}
-	
-	// setter/getters
-	public void setTerrain(Terrain terr) { this.terr = terr; }
-	public Terrain getTerrain() { return this.terr; }
-	public void setEffect(Effect eff) { this.eff = eff; }
-	public Effect getEffect() { return this.eff; }
-	public Tile getTile() { return this; }
 }

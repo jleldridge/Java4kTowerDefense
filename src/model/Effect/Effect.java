@@ -1,14 +1,15 @@
 package model.Effect;
 
-import model.Viewable;
+import java.awt.image.BufferedImage;
 
 /**
  * generic effect object (i.e.: a spell) 
  */
-public abstract class Effect implements Viewable {
+public abstract class Effect{
 	// fields
-	private int x, y;
-	
+	public int x, y;
+	public BufferedImage sprite;
+
 	// setters/getters
 	public int getX() { return this.x; }
 	public void setX(int x) { this.x = x; }

@@ -19,9 +19,9 @@ public class Player{
 		this.y=0;
 		size=25;
 		sprite = new BufferedImage(this.size, this.size, 
-				BufferedImage.TYPE_INT_RGB);
+				BufferedImage.TYPE_INT_ARGB);
 		Graphics g = sprite.getGraphics();
-		g.setColor(Color.blue);
+		g.setColor(new Color(0, 0, 250, 200));
 		g.fillRect(0, 0, this.size, this.size);
 		spellCooldown = 0;
 		direction = 'd';
